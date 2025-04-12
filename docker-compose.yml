@@ -1,0 +1,16 @@
+name: minio
+
+services:
+  minio:
+    image: minio/minio:latest
+    container_name: minio
+    ports:
+      - "9000:9000" # Interfaz web
+      - "9001:9001" # Consola administrativa
+    environment:
+      MINIO_ROOT_USER: admin
+      MINIO_ROOT_PASSWORD: admin
+      #MINIO_BROWSER_REDIRECT_URL: https://minio.localhost # Uncomment if you want to use a custom domain
+    volumes:
+      - ./data:/data
+    command: server /data --console-address ":9001"
