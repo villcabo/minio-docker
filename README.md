@@ -1,8 +1,20 @@
 # MinIO — Docker Compose (prod)
 
+**Languages:** **English** · [Español](./README.es.md)
+
 Production-ready MinIO stack on a single host: SNMD with 4 drives (erasure
 coding EC:2), healthcheck, rotated logging, resource limits, and optional
 bucket bootstrap.
+
+## Clone
+
+```bash
+# Default: clones into ./minio-docker
+git clone https://github.com/villcabo/minio-docker.git
+
+# Custom name: pass the target directory as a second argument
+git clone https://github.com/villcabo/minio-docker.git my-custom-name
+```
 
 ## Prerequisites
 
@@ -95,7 +107,8 @@ docker run --rm -it --network minio_minio_net minio/mc \
 ├── docker-compose.yml   # stack
 ├── .env.example         # variables (copy to .env)
 ├── init.sh              # creates /srv/minio/data{1..4} with correct ownership
-└── README.md
+├── README.md            # English docs (default)
+└── README.es.md         # Spanish docs
 ```
 
 ## Security notes
