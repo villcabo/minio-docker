@@ -27,6 +27,7 @@ services:
       - ${MINIO_DATA_PATH:-/srv/minio}/data4:/data4
     networks:
       - minio_net
+      - minio_router
     healthcheck:
       test: ["CMD-SHELL", "curl -fsS http://localhost:9000/minio/health/live || exit 1"]
       interval: 15s
@@ -89,3 +90,6 @@ networks:
     driver: bridge
     driver_opts:
       com.docker.network.driver.mtu: "${NETWORK_MTU:-1500}"
+  minio_router:
+    external: true
+    name: ${MINIO_ROUTER_NETWORK:-minio_router}
