@@ -98,10 +98,6 @@ docker run --rm -it --network minio_minio_net minio/mc \
 └── README.md
 ```
 
-## Author
-
-**Bismarck Villca** — [@villcabo](https://github.com/villcabo)
-
 ## Security notes
 
 - **Do not expose 9000/9001 to the internet without TLS.** For public prod add
@@ -110,3 +106,33 @@ docker run --rm -it --network minio_minio_net minio/mc \
 - `.env` must not be committed to git (covered by `.gitignore`).
 - Root password ≥ 20 characters. For applications use service account
   credentials (`mc admin user svcacct add`), not the root ones.
+
+## 👨‍💻 Author
+
+<div align="center">
+  <img src="https://github.com/villcabo.png" width="100" height="100" style="border-radius: 50%;" alt="villcabo">
+  <br/>
+  <strong>Bismarck Villca</strong>
+  <br/>
+  <br/>
+  <a href="https://github.com/villcabo">
+    <img src="https://img.shields.io/badge/GitHub-villcabo-blue?style=for-the-badge&logo=github" alt="GitHub Profile">
+  </a>
+  <br/>
+  <a href="https://linkedin.com/in/villcabo">
+    <img src="https://img.shields.io/badge/LinkedIn-villcabo-0A66C2?style=for-the-badge&logo=linkedin" alt="LinkedIn Profile">
+  </a>
+  <br/>
+  <a href="https://facebook.com/villcabo">
+    <img src="https://img.shields.io/badge/Facebook-villcabo-1877F2?style=for-the-badge&logo=facebook" alt="Facebook Profile">
+  </a>
+  <br/>
+  <a href="https://x.com/villcabo">
+    <img src="https://img.shields.io/badge/X-@villcabo-000000?style=for-the-badge&logo=x" alt="X Profile">
+  </a>
+  <br/>
+</div>
+
+---
+
+⭐ **If this project helped you, please consider giving it a star!** ⭐
