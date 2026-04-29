@@ -35,11 +35,8 @@ $EDITOR .env   # setear MINIO_ROOT_USER y MINIO_ROOT_PASSWORD (≥ 20 chars)
 ./init.sh
 
 # 3. Crear la red externa compartida (una sola vez)
-#    El nombre debe coincidir con MINIO_ROUTER_NETWORK en .env (default: minio_router).
-docker network create \
-  --driver bridge \
-  --opt com.docker.network.driver.mtu=1500 \
-  "${MINIO_ROUTER_NETWORK:-minio_router}"
+#    Si querés otro nombre, cambialo acá y en MINIO_ROUTER_NETWORK en .env.
+docker network create --driver bridge --opt com.docker.network.driver.mtu=1500 minio_router
 
 # 4. Levantar
 docker compose up -d

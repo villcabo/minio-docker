@@ -13,7 +13,7 @@ bucket bootstrap.
 git clone https://github.com/villcabo/minio-docker.git
 
 # Custom name: pass the target directory as a second argument
-git clone https://github.com/villcabo/minio-docker.git my-custom-name
+git clone https://github.com/villcabo/minio-docker.git minio-docker-custom
 ```
 
 ## Prerequisites
@@ -35,11 +35,8 @@ $EDITOR .env   # set MINIO_ROOT_USER and MINIO_ROOT_PASSWORD (≥ 20 chars)
 ./init.sh
 
 # 3. Create the shared external network (one-time)
-#    Name must match MINIO_ROUTER_NETWORK in .env (default: minio_router).
-docker network create \
-  --driver bridge \
-  --opt com.docker.network.driver.mtu=1500 \
-  "${MINIO_ROUTER_NETWORK:-minio_router}"
+#    Change the name here and in MINIO_ROUTER_NETWORK in .env if you want a custom one.
+docker network create --driver bridge --opt com.docker.network.driver.mtu=1500 minio_router
 
 # 4. Start
 docker compose up -d
