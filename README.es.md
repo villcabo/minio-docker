@@ -12,7 +12,7 @@ Stack de MinIO listo para producción sobre un solo host: SNMD con 4 drives
 git clone https://github.com/villcabo/minio-docker.git
 
 # Nombre custom: pasá el directorio destino como segundo argumento
-git clone https://github.com/villcabo/minio-docker.git mi-nombre-custom
+git clone https://github.com/villcabo/minio-docker.git minio-docker-custom
 ```
 
 ## Prerequisitos
