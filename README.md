@@ -32,7 +32,7 @@ cp .env.example .env
 $EDITOR .env   # set MINIO_ROOT_USER and MINIO_ROOT_PASSWORD (≥ 20 chars)
 
 # 2. Create the 4 data directories with the right owner
-./init.sh
+./scripts/init.sh
 
 # 3. Create the shared external network (one-time)
 #    Change the name here and in MINIO_ROUTER_NETWORK in .env if you want a custom one.
@@ -89,6 +89,7 @@ S3 API:  `http://<host>:9000`
 | Upgrade | `docker compose pull && docker compose up -d` |
 | Stop | `docker compose down` (keeps data) |
 | Wipe everything (incl. data!) | `docker compose down && sudo rm -rf $MINIO_DATA_PATH` |
+| Sync `.env` with new keys from `.env.example` | `./scripts/env-sync.sh` |
 
 ### `mc` client from the host
 
@@ -103,7 +104,9 @@ docker run --rm -it --network minio_minio_net minio/mc \
 .
 ├── docker-compose.yml   # stack
 ├── .env.example         # variables (copy to .env)
-├── init.sh              # creates /srv/minio/data{1..4} with correct ownership
+├── scripts/
+│   ├── init.sh          # creates /srv/minio/data{1..4} with correct ownership
+│   └── env-sync.sh      # safely merges new vars from .env.example into .env
 ├── README.md            # English docs (default)
 └── README.es.md         # Spanish docs
 ```
