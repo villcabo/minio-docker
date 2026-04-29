@@ -3,8 +3,7 @@
 **Languages:** **English** · [Español](./README.es.md)
 
 Production-ready MinIO stack on a single host: SNMD with 4 drives (erasure
-coding EC:2), healthcheck, rotated logging, resource limits, and optional
-bucket bootstrap.
+coding EC:2), healthcheck, rotated logging, and resource limits.
 
 ## Clone
 
@@ -91,11 +90,41 @@ S3 API:  `http://<host>:9000`
 | Wipe everything (incl. data!) | `docker compose down && sudo rm -rf $MINIO_DATA_PATH` |
 | Sync `.env` with new keys from `.env.example` | `./scripts/env-sync.sh` |
 
-### `mc` client from the host
+### `mc` tips
+
+Run any `mc` command as a one-shot container attached to the stack network.
+Define this alias once in your shell and reuse it:
 
 ```bash
-docker run --rm -it --network minio_minio_net minio/mc \
-  alias set local http://minio:9000 "$MINIO_ROOT_USER" "$MINIO_ROOT_PASSWORD"
+alias mc='docker run --rm -i --network minio_minio_net \
+  -e MC_HOST_local="http://${MINIO_ROOT_USER}:${MINIO_ROOT_PASSWORD}@minio:9000" \
+  minio/mc'
+```
+
+> If you set `MINIO_NAME_SUFFIX` (e.g. `loki`), the network is
+> `<project>_minio_net` (default `minio_minio_net`) and the host inside the
+> container is `minio` (or `minio-<suffix>` if you renamed it).
+
+Most useful commands:
+
+```bash
+# Cluster health and capacity
+mc admin info local
+
+# Create / list buckets
+mc mb local/my-bucket
+mc ls local
+mc ls --recursive local/my-bucket
+
+# Service account for an app (don't use root creds in apps)
+mc admin user svcacct add local "$MINIO_ROOT_USER"
+# → returns Access Key + Secret Key for the app
+
+# Public read-only on a bucket (only when you really need it)
+mc anonymous set download local/my-bucket
+
+# Backup / sync to another target (S3, MinIO, local FS)
+mc mirror --overwrite --remove local/my-bucket /path/to/backup
 ```
 
 ## Layout
